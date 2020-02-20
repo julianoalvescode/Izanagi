@@ -1,0 +1,12 @@
+{
+  "name": "ia-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/julianoalvescode/ia-bot.git",
+  "author": "Juliano <contato.julianoalvess@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
