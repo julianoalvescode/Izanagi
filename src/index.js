@@ -34,7 +34,7 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
 
-    message.body(`Sua resposta é teste ${req.body.MessageSid}`)
+    message.body(`Você disse: ${req.body.Body}`)
 
     console.log(response)
 
