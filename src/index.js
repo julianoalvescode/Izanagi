@@ -4,15 +4,16 @@ const assistant = require('./service/api-watson')
 const client = require('./service/api-twilio')
 const axios = require('axios').default;
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const bodyParser = require('body-parser');
 
-
-const text = 'Ainda bebe, rôbo do Juliano'
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('Umbler listening on port %s', port);
 });
 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
 
@@ -33,10 +34,9 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
     // message.body('Juliano Brabo');
-    const corpo = req.body.Body.toString();
     // const status = req.body.MessageSid;
 
-    message.body(`Sua resposta é ${corpo}`)
+    message.body(`Sua resposta é teste ${req.body.MessageSid}`)
 
     console.log(response)
 
