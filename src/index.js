@@ -34,6 +34,13 @@ app.post('/sms', (req, res) => {
     const message = response.message();
     message.body('Juliano Brabo');
     
+
+    if(req.Body == 'hello') {
+      message.body('Juliano Brabo');
+    } else {
+      message.body('Continua brabo');
+    }
+
     console.log(response)
 
     res.writeHead(200, {
