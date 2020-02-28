@@ -37,6 +37,10 @@ app.post('/sms', (req, res) => {
     
     console.log(response)
 
+    res.writeHead(200, {
+      'Content-Type':'text/xml'
+    });
+
     res.end(response.toString())
 
 })
