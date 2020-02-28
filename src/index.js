@@ -35,7 +35,7 @@ app.post('/sms', (req, res) => {
     message.body('Juliano Brabo');
     
 
-    if(req.Body == 'hello') {
+    if(req.body == 'hello') {
       message.body('Juliano Brabo');
     } else {
       message.body('Continua brabo');
