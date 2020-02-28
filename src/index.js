@@ -1,11 +1,19 @@
 const express = require('express');
 const app = express()
+
+// IBM 
 const assistant = require('./service/api-watson')
-const client = require('./service/api-twilio')
+
 const axios = require('axios').default;
+
+// Twilio
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const bodyParser = require('body-parser');
+const client = require('./service/api-twilio')
 const twilio = require('twilio')
+
+// Body Parser
+const bodyParser = require('body-parser');
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
@@ -28,8 +36,38 @@ app.get('/', (req, res) => {
   //  })
   // .then(message => console.log(message.sid));
   
-      res.send('<h1>IA Bot</h1>')
+
+  assistant.createSession({
+    assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719'
+  })
+    .then(res => {
+
+      assistant.message({
+        assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719',
+        sessionId: res.result.session_id,
+        input: {
+          'message_type': 'text',
+          'text': 'hello'
+        }
+      })
+      .then(res => {
+        console.log(res.result.output.generic[0].text);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+  
+
+  res.send(console.log('Texto aqui'))
+
 })
+
 
 app.post('/sms', (req, res) => {
 
