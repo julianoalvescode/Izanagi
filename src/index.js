@@ -36,7 +36,7 @@ app.post('/sms', (req, res) => {
     const corpo = req.params.Body;
     // const status = req.body.MessageSid;
 
-    message.body(`Sua resposta é ${corpo}`)
+    message.body(`Sua resposta é ${corpo.toString()}`)
 
     console.log(response)
 
