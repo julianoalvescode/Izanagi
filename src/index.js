@@ -33,9 +33,9 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
     // message.body('Juliano Brabo');
-    
+    const status = req.body.MessageSid;
 
-      message.body(req.body.MessageSid);
+      message.body(status)
 
     console.log(response)
 
