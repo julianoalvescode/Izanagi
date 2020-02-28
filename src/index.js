@@ -35,8 +35,14 @@ app.post('/sms', (req, res) => {
 
     const response = new MessagingResponse();
     const message = response.message();
+    const responseUser = req.body.Body;
+    
 
-    message.body(`Você disse: ${req.body.Body}`)
+    if(responseUser == '157') {
+      message.body(`${req.body.Body} isso é um artigo penal`)
+    } else {
+      message.body(`Você disse: ${req.body.Body}`)
+    }
 
 
     res.writeHead(200, {
