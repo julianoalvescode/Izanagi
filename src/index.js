@@ -32,14 +32,7 @@ app.post('/sms', (req, res) => {
 
     const response = new MessagingResponse();
     const message = response.message();
-  
-    if(req.body.Body == 'Lindo') {
-
-      message.body('Lindo mesmo');
-
-    } else {
-      message.body('Mensagem não entendida');
-    }
+    message.body('Juliano Brabo');
     
     console.log(response)
 
