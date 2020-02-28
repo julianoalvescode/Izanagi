@@ -5,12 +5,14 @@ const client = require('./service/api-twilio')
 const axios = require('axios').default;
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const bodyParser = require('body-parser');
-
+const twilio = require('twilio')
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log('Umbler listening on port %s', port);
 });
+
+// Body-parser Config
 
 app.use(bodyParser.urlencoded({extended: true}))
 // app.use(bodyParser.json())
@@ -31,18 +33,19 @@ app.get('/', (req, res) => {
 
 app.post('/sms', (req, res) => {
 
-    const response = new MessagingResponse();
-    const message = response.message();
+    // const response = new MessagingResponse();
+    // const message = response.message();
 
-    message.body(`Você disse: ${req.body.Body}`)
-
-    console.log(response)
+    // message.body(`Você disse: ${req.body.Body}`)
+    
+    const voice = new twilio.twiml.VoiceResponse();
+    voice.say({voice: 'woman'}, 'Bora lá, Juliano Alves' )
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
     });
 
-    res.end(response.toString())
+    res.end(voice.toString())
 
 })
 
