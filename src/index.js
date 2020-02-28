@@ -3,6 +3,7 @@ const app = express()
 const assistant = require('./service/api-watson')
 const client = require('./service/api-twilio')
 const axios = require('axios').default;
+const MessageResponse = require('twilio').twiml.MessagingResponse;
 
 
 const text = 'Ainda bebe, rôbo do Juliano'
@@ -12,7 +13,16 @@ app.listen(port, function () {
     console.log('Umbler listening on port %s', port);
 });
 
+
+
 app.get('/', (req, res) => {
+
+  const response = new MessageResponse();
+  const message = response.message()
+
+  message.body('Hello World')
+  response.redirect('Voce mandou Hello World');
+
   // client.messages
   // .create({
   //    mediaUrl: ['https://avatars2.githubusercontent.com/u/43914533?s=460&v=4'],
