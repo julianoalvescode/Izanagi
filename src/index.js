@@ -33,19 +33,17 @@ app.get('/', (req, res) => {
 
 app.post('/sms', (req, res) => {
 
-    // const response = new MessagingResponse();
-    // const message = response.message();
+    const response = new MessagingResponse();
+    const message = response.message();
 
-    // message.body(`Você disse: ${req.body.Body}`)
-    
-    const resp = new twilio.twiml.VoiceResponse();
-    resp.say({voice:'woman'}, 'ahoy hoy! Testing Twilio and node.js');
+    message.body(`Você disse: ${req.body.Body}`)
+
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
     });
 
-    res.end(resp.toString())
+    res.end(response.toString())
 
 })
 
