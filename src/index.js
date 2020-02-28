@@ -34,9 +34,9 @@ app.post('/sms', (req, res) => {
     const message = response.message();
     message.body('Hello World!');
     response.redirect('https://demo.twilio.com/welcome/sms/');
-    response.message('Store Location: 123 Easy St.')
+    
 
-    console.log(`Aqui ${response.toString()}`);
+    res.json(response.toString())
 
 })
 
