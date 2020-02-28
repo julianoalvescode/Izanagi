@@ -3,7 +3,7 @@ const app = express()
 const assistant = require('./service/api-watson')
 const client = require('./service/api-twilio')
 const axios = require('axios').default;
-const MessageResponse = require('twilio').twiml.MessagingResponse;
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 
 const text = 'Ainda bebe, rôbo do Juliano'
@@ -14,14 +14,7 @@ app.listen(port, function () {
 });
 
 
-
 app.get('/', (req, res) => {
-
-  const response = new MessageResponse();
-  const message = response.message()
-
-  message.body('Hello World')
-  response.redirect('Voce mandou Hello World');
 
   // client.messages
   // .create({
@@ -31,6 +24,19 @@ app.get('/', (req, res) => {
   //    to: 'whatsapp:+5521969023070'
   //  })
   // .then(message => console.log(message.sid));
-      res.send('<h1>Testando Tudo</h1>')
+  
+      res.send('<h1>Testando Tud</h1>')
+})
+
+app.post('/sms', (req, res) => {
+
+    const response = new MessagingResponse();
+    const message = response.message();
+    message.body('Hello World!');
+    response.redirect('https://demo.twilio.com/welcome/sms/');
+
+    console.log(`Aqui ${response.toString()}`);
+
+
 })
 
