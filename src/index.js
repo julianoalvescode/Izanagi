@@ -38,9 +38,5 @@ app.post('/sms', (req, res) => {
 
     console.log(`Aqui ${response.toString()}`);
 
-    
-
-    res.json(response.toString())
-
 })
 
