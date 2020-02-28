@@ -38,14 +38,14 @@ app.post('/sms', (req, res) => {
 
     // message.body(`Você disse: ${req.body.Body}`)
     
-    const voice = new twilio.twiml.VoiceResponse();
-    voice.say({voice: 'woman'}, 'Bora lá, Juliano Alves' )
+    const resp = new twilio.twiml.VoiceResponse();
+    resp.say({voice:'woman'}, 'ahoy hoy! Testing Twilio and node.js');
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
     });
 
-    res.end(voice.toString())
+    res.end(resp.toString())
 
 })
 
