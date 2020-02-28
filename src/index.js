@@ -12,8 +12,8 @@ app.listen(port, function () {
     console.log('Umbler listening on port %s', port);
 });
 
-// app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+// app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
 
