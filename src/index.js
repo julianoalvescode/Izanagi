@@ -32,8 +32,14 @@ app.post('/sms', (req, res) => {
 
     const response = new MessagingResponse();
     const message = response.message();
-    message.body('Hello World!');
-    response.redirect('https://demo.twilio.com/welcome/sms/');
+  
+    if(req.body.MessageSid == 'Lindo') {
+
+      message.body('Lindo mesmo');
+
+    } else {
+      message.body('Mensagem não entendida');
+    }
     
     console.log(response)
 
