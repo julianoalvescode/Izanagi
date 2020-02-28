@@ -33,7 +33,7 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
   
-    if(req.body.MessageSid == 'Lindo') {
+    if(req.body.Body == 'Lindo') {
 
       message.body('Lindo mesmo');
 
