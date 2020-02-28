@@ -35,8 +35,9 @@ app.post('/sms', (req, res) => {
     message.body('Hello World!');
     response.redirect('https://demo.twilio.com/welcome/sms/');
     
+    console.log(response)
 
-    res.json(response.toString())
+    res.end(response.toString())
 
 })
 
