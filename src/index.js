@@ -12,7 +12,7 @@ app.listen(port, function () {
     console.log('Umbler listening on port %s', port);
 });
 
-app.use(bodyParser.urlencoded({extended: true}))
+// app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
@@ -33,8 +33,6 @@ app.post('/sms', (req, res) => {
 
     const response = new MessagingResponse();
     const message = response.message();
-    // message.body('Juliano Brabo');
-    // const status = req.body.MessageSid;
 
     message.body(`Sua resposta é teste ${req.body.MessageSid}`)
 
