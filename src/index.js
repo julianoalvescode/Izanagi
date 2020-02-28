@@ -25,21 +25,17 @@ app.get('/', (req, res) => {
   //  })
   // .then(message => console.log(message.sid));
   
-      res.send('<h1>Testando Tud</h1>')
+      res.send('<h1>IA Bot</h1>')
 })
 
 app.post('/sms', (req, res) => {
 
     const response = new MessagingResponse();
     const message = response.message();
-    message.body('Juliano Brabo');
+    // message.body('Juliano Brabo');
     
 
-    if(req.body == 'hello') {
-      message.body('Juliano Brabo');
-    } else {
-      message.body('Continua brabo');
-    }
+      message.body(req.body.MessageSid);
 
     console.log(response)
 
