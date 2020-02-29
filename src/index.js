@@ -97,6 +97,7 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
     const responseUser = req.body.Body;
+    const respostaIzanagi = getTalkIzanagi(responseUser);
 
     // if(responseUser == '157') {
     //   message.body(`${req.body.Body} isso é um artigo penal`)
@@ -104,7 +105,7 @@ app.post('/sms', (req, res) => {
     //   message.body(`Você disse: ${req.body.Body}`)
     // }
 
-    message.body(`Testando: ${getTalkIzanagi(responseUser)}`)
+    message.body(`Testando: ${respostaIzanagi}`)
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
