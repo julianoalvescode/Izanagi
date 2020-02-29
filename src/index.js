@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express()
 
+// Dotenv
+require('dotenv').config()
+
 // IBM 
 const assistant = require('./service/api-watson')
 
@@ -25,46 +28,64 @@ app.listen(port, function () {
 app.use(bodyParser.urlencoded({extended: true}))
 // app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
+async function sendMessage(body, to) {
 
-  // client.messages
-  // .create({
-  //    mediaUrl: ['https://avatars2.githubusercontent.com/u/43914533?s=460&v=4'],
-  //    from: 'whatsapp:+14155238886',
-  //    body: `Este é você`,
-  //    to: 'whatsapp:+5521969023070'
-  //  })
-  // .then(message => console.log(message.sid));
-  
+  return new Promise((resolve, reject) => {
 
-  assistant.createSession({
-    assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719'
+    client.messages
+    .create({
+       mediaUrl: ['https://avatars2.githubusercontent.com/u/43914533?s=460&v=4'],
+       from: 'whatsapp:+14155238886',
+       body: `Este é você ${body}`,
+       to: `whatsapp:${to}`
+     })
+    .then(message => resolve(console.log(message.sid)));
+
   })
-    .then(res => {
 
-      assistant.message({
-        assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719',
-        sessionId: res.result.session_id,
-        input: {
-          'message_type': 'text',
-          'text': 'hello'
-        }
-      })
+}
+
+async function getTalkIzanagi(textTalk) {
+  return new Promise((resolve, reject) => {
+
+    assistant.createSession({
+      assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719'
+    })
       .then(res => {
-        console.log(res.result.output.generic[0].text);
+  
+        assistant.message({
+          assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719',
+          sessionId: res.result.session_id,
+          input: {
+            'message_type': 'text',
+            'text': textTalk
+          }
+        })
+        .then(res => {
+          console.log(res.result.output.generic[0].text);
+
+          const textResponse = res.result.output.generic[0].text
+
+          resolve(textResponse)
+
+        })
+        .catch(err => {
+          console.log(err);
+        });
+  
       })
       .catch(err => {
         console.log(err);
       });
 
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  })
 
-  
 
-  res.send(console.log('Texto aqui'))
+}
+
+app.get('/', (req, res) => {
+
+  res.send(console.log('Servidor Rodando'))
 
 })
 
@@ -74,14 +95,14 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
     const responseUser = req.body.Body;
-    
 
-    if(responseUser == '157') {
-      message.body(`${req.body.Body} isso é um artigo penal`)
-    } else {
-      message.body(`Você disse: ${req.body.Body}`)
-    }
+    // if(responseUser == '157') {
+    //   message.body(`${req.body.Body} isso é um artigo penal`)
+    // } else {
+    //   message.body(`Você disse: ${req.body.Body}`)
+    // }
 
+    message.body(getTalkIzanagi(responseUser))
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
