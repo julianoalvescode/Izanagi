@@ -64,7 +64,7 @@ async function getTalkIzanagi(textTalk) {
         .then(res => {
           console.log(res.result.output.generic[0].text);
 
-          const textResponse = res.result.output.generic[0].text
+          const textResponse = `${res.result.output.generic[0].text}`
 
           resolve(textResponse)
 
@@ -87,6 +87,8 @@ app.get('/', (req, res) => {
 
   res.send(console.log('Servidor Rodando'))
 
+  getTalkIzanagi('Olá')
+
 })
 
 
@@ -102,7 +104,7 @@ app.post('/sms', (req, res) => {
     //   message.body(`Você disse: ${req.body.Body}`)
     // }
 
-    message.body(getTalkIzanagi(responseUser))
+    message.body(`Testando: ${getTalkIzanagi(responseUser)}`)
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
