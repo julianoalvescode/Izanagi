@@ -45,18 +45,32 @@ async function sendMessage(body, to) {
 
 }
 
-async function getTalkIzanagi(textTalk) {
-
+async function createIDSession() {
   return new Promise((resolve, reject) => {
 
     assistant.createSession({
       assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719'
     })
-      .then(res => {
+    .then(res => {
+      const ID = res.result.session_id;
+      console.log(res.result.session_id)
+
+      resolve(ID)
+
+    }) 
+
+  })
+
+}
+
+async function getTalkIzanagi(textTalk, id) {
+
+  return new Promise((resolve, reject) => {
+
   
         assistant.message({
           assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719',
-          sessionId: res.result.session_id,
+          sessionId: id,
           input: {
             'message_type': 'text',
             'text': textTalk
@@ -73,13 +87,6 @@ async function getTalkIzanagi(textTalk) {
         .catch(err => {
           console.log(err);
         });
-  
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-      
 
   })
 
@@ -88,21 +95,34 @@ async function getTalkIzanagi(textTalk) {
 
 app.get('/', async (req, res) => {
 
-  let respostaIzanagi = await getTalkIzanagi('Olá')
-  
-  res.send(console.log('Servidor Rodando'))
+  // if(localStorage.getItem('IBM_SESSION') === false){
 
-  
+  //   localStoragse.setItem('IBM_SESSION', await createIDSession())
+
+  // } else {
+  //   return false;
+  // }
+
+  res.send(console.log('Servidor Rodando'))
 
 })
 
 
 app.post('/sms', async (req, res) => {
 
+    // if(localStorage.getItem('IBM_SESSION') === false){
+
+    //   localStorage.setItem('IBM_SESSION', await createIDSession())
+
+    // } else {
+    //   return false;
+    // }
+
+
     const response = new MessagingResponse();
     const message = response.message();
     const responseUser = req.body.Body;
-    const respostaIzanagi = await getTalkIzanagi('Olá');
+    const respostaIzanagi = await getTalkIzanagi(responseUser, await createIDSession());
   
 
     // if(responseUser == '157') {
@@ -111,7 +131,7 @@ app.post('/sms', async (req, res) => {
     //   message.body(`Você disse: ${req.body.Body}`)
     // }
 
-    message.body(`Testando: ${respostaIzanagi}`)
+    message.body(`${respostaIzanagi}`)
   
 
     res.writeHead(200, {
