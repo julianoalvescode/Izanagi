@@ -46,6 +46,7 @@ async function sendMessage(body, to) {
 }
 
 async function getTalkIzanagi(textTalk) {
+
   return new Promise((resolve, reject) => {
 
     assistant.createSession({
@@ -78,6 +79,8 @@ async function getTalkIzanagi(textTalk) {
         console.log(err);
       });
 
+      
+
   })
 
 
@@ -87,7 +90,7 @@ app.get('/', (req, res) => {
 
   res.send(console.log('Servidor Rodando'))
 
-  getTalkIzanagi('Olá')
+  
 
 })
 
@@ -97,7 +100,7 @@ app.post('/sms', (req, res) => {
     const response = new MessagingResponse();
     const message = response.message();
     const responseUser = req.body.Body;
-    const respostaIzanagi = getTalkIzanagi(responseUser);
+    const respostaIzanagi = getTalkIzanagi('Olá');
 
     // if(responseUser == '157') {
     //   message.body(`${req.body.Body} isso é um artigo penal`)
