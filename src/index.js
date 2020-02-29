@@ -86,8 +86,10 @@ async function getTalkIzanagi(textTalk) {
 
 }
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 
+  let respostaIzanagi = await getTalkIzanagi('Olá')
+  
   res.send(console.log('Servidor Rodando'))
 
   
@@ -95,12 +97,13 @@ app.get('/', (req, res) => {
 })
 
 
-app.post('/sms', (req, res) => {
+app.post('/sms', async (req, res) => {
 
     const response = new MessagingResponse();
     const message = response.message();
     const responseUser = req.body.Body;
-    const respostaIzanagi = getTalkIzanagi('Olá');
+    const respostaIzanagi = await getTalkIzanagi('Olá');
+  
 
     // if(responseUser == '157') {
     //   message.body(`${req.body.Body} isso é um artigo penal`)
@@ -109,6 +112,7 @@ app.post('/sms', (req, res) => {
     // }
 
     message.body(`Testando: ${respostaIzanagi}`)
+  
 
     res.writeHead(200, {
       'Content-Type':'text/xml'
