@@ -49,7 +49,7 @@ async function createIDSession() {
   return new Promise((resolve, reject) => {
 
     assistant.createSession({
-      assistantId: process.env.ASSISTANT_ID
+      assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719'
     })
     .then(res => {
       const ID = res.result.session_id;
@@ -69,7 +69,7 @@ async function getTalkIzanagi(textTalk, id) {
 
   
         assistant.message({
-          assistantId: process.env.ASSISTANT_ID,
+          assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719',
           sessionId: id,
           input: {
             'message_type': 'text',
