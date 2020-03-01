@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://andradlog.com.br/api/image/izanagi.svg" height="150" width="350" alt="Izanami" />
+  <img src="https://andradlog.com.br/api/image/izanagi.svg" height="250"  alt="Izanami" />
 </p>
 
 
-<h3 align="center">
+<h5 align="center">
   Izanagi a chatbot with artificial intelligence programmed to replace me on whatsapp 🤖
-</h3>
+</h5>
 
 ## About
 My first project for test my knows com Machine Learning :)
