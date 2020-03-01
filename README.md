@@ -3,9 +3,9 @@
 </p>
 
 
-<h5 align="center">
+<h4 align="center">
   Izanagi a chatbot with artificial intelligence programmed to replace me on whatsapp 🤖
-</h5>
+</h4>
 
 ## About
 My first project for test my knows com Machine Learning :)
