@@ -12,7 +12,7 @@ module.exports = {
     const response = new MessagingResponse()
     const message = response.message()
     const responseUser = req.Body.body
-    const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser, await izanagiUtils.createIDSession())
+    const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser)
 
     message.body(responseIzanagi)
 

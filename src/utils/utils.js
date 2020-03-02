@@ -29,11 +29,11 @@ module.exports = {
     })
   },
 
-  async getTalkIzanagi (textTalk, id) {
+  async getTalkIzanagi (textTalk) {
     return new Promise((resolve, reject) => {
       assistant.message({
         assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719',
-        sessionId: id,
+        sessionId: this.createIDSession(),
         input: {
           message_type: 'text',
           text: textTalk
