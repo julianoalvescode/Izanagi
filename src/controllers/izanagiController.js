@@ -13,14 +13,14 @@ module.exports = {
   async sendMessage (req, res) {
     const response = new MessagingResponse()
     const message = response.message()
-    // const responseUser = req.body.Body
-    // const number = req.body.From
-    // const numberUser = await Session.findOne({ number_user: number })
-    // const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser,
-    //   numberUser ? numberUser.session_id : await izanagiUtils.createIDSession(number)
-    // )
+    const responseUser = req.body.Body
+    const number = req.body.From
+    const numberUser = await Session.findOne({ number_user: number })
+    const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser,
+      numberUser ? numberUser.session_id : await izanagiUtils.createIDSession(number)
+    )
 
-    const responseIzanagi = 'Testando'
+    // const responseIzanagi = 'Testando'
 
     message.body(responseIzanagi)
 
