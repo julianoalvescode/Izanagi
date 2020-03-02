@@ -11,8 +11,8 @@ module.exports = {
   async sendMessage (req, res) {
     const response = new MessagingResponse()
     const message = response.message()
-    const { Body } = req.Body
-    const responseIzanagi = await izanagiUtils.getTalkIzanagi(Body, await izanagiUtils.createIDSession())
+    const responseUser = req.Body.body
+    const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser, await izanagiUtils.createIDSession())
 
     message.body(responseIzanagi)
 
