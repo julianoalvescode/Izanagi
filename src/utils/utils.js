@@ -1,16 +1,21 @@
 const assistant = require('./../service/api-watson')
-const client = require('./../service/api-twilio')
+const Session = require('./../models/Session')
 
 module.exports = {
 
-  async createIDSession () {
+  async createIDSession (number) {
     return new Promise((resolve, reject) => {
       assistant.createSession({
         assistantId: 'c5315746-f92d-429e-9bb1-436a3ce8a719'
       })
-        .then(res => {
+        .then(async res => {
           const ID = res.result.session_id
           console.log(res.result.session_id)
+
+          await Session.create({
+            session_id: ID,
+            number_user: number
+          })
 
           resolve(ID)
         })

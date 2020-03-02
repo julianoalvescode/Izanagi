@@ -1,4 +1,6 @@
+
 const MessagingResponse = require('twilio').twiml.MessagingResponse
+const Session = require('./../models/Session')
 
 const izanagiUtils = require('./../utils/utils')
 
@@ -12,7 +14,11 @@ module.exports = {
     const response = new MessagingResponse()
     const message = response.message()
     const responseUser = req.body.Body
-    const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser, await izanagiUtils.createIDSession())
+    const number = req.body.to
+    const numberUser = await Session.findOne({ number_user: number })
+    const responseIzanagi = await izanagiUtils.getTalkIzanagi(responseUser,
+      numberUser ? numberUser.session_id : await izanagiUtils.createIDSession(number)
+    )
 
     message.body(responseIzanagi)
 
