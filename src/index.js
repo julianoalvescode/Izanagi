@@ -10,7 +10,7 @@ app.listen(port, function () {
   console.log('Umbler listening on port %s', port)
 })
 
-mongoose.connect('mongodb+srv://juliano:oXyBoCsmJdZMvtSH@izanagi-hnoqu.mongodb.net/test?retryWrites=true&w=majority',
+mongoose.connect('',
   { useNewUrlParser: true, useUnifiedTopology: true }
 )
 
